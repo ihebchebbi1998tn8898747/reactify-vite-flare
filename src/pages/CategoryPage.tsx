@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import TopNavbar from "../components/TopNavbar";
 import BeltsSection from "../components/productsPages/BeltsSection";
@@ -7,27 +7,16 @@ import ProductsSection from "../components/productsPages/ProductsSection";
 import BrandNavbarSection from "@/components/productsPages/BrandNavbarSection";
 import MainNavbarProduct from "@/components/productsPages/MainNavbarProduct";
 import { ArrowLeft } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
 
 const CategoryPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { toast } = useToast();
 
   // Extract the full path hierarchy
   const pathSegments = location.pathname
     .split('/')
     .filter(segment => segment !== '' && segment !== 'category');
-
-  useEffect(() => {
-    console.log("Current category path:", pathSegments);
-    // Show a toast to indicate the current category path
-    toast({
-      title: "Current Category",
-      description: `You are viewing: ${pathSegments.join(' > ')}`,
-    });
-  }, [location.pathname]);
 
   // Example of conditional rendering based on path
   const isOutletSection = pathSegments[0] === 'outlet';

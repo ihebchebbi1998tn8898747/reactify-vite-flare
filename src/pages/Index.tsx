@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Suspense, useTransition } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { trackVisitor } from '../utils/visitorTracking';
 import { Skeleton } from "@/components/ui/skeleton";
 
 const TopNavbar = React.lazy(() => import('../components/TopNavbar'));
@@ -38,7 +37,6 @@ const Index = () => {
     // Mark that user has visited the index page
     sessionStorage.setItem('hasVisitedIndex', 'true');
     
-    trackVisitor('Accueil');
     const handleScroll = () => {
       startTransition(() => {
         if (window.scrollY > 100) {
