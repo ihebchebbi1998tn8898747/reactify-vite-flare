@@ -1,34 +1,97 @@
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export const Hero = () => {
+const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const banners = [
+    {
+      image: 'banner.png',
+      title: 'Univers cadeau'
+    },
+    {
+      image: 'banner2.png',
+      title: 'Nouvelle collection'
+    },
+    {
+      image: 'banner3.png',
+      title: 'Le sur mesure'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === banners.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 8000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
-      <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center space-y-4 text-center animate-fade-up">
-          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-600">
-            Welcome to Your New Project
-          </h1>
-          <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-            Start building something amazing with React and Vite. This template includes everything you need to get started.
-          </p>
-          <div className="space-x-4">
-            <Button
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-all duration-200"
-              size="lg"
-            >
-              Get Started
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 hover:bg-gray-100 transition-all duration-200"
-            >
-              Learn More
-            </Button>
+    <section className="relative h-[95vh] overflow-hidden"> {/* Changed from h-screen to h-[90vh] */}
+      <AnimatePresence mode='wait'>
+        <motion.div
+          key={currentIndex}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${banners[currentIndex].image}')`,
+            willChange: 'transform'
+          }}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{
+            duration: 1.2,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }}
+        />
+      </AnimatePresence>
+
+      <div className="absolute inset-0 bg-black/50" />
+
+      <div className="absolute bottom-6 w-full px-4 md:px-6 lg:px-8">
+        <div className="flex flex-col items-center lg:items-start">
+          <div className="flex justify-center lg:justify-start gap-4">
+            {banners.map((banner, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center lg:items-start"
+                style={{ minWidth: '100px' }}
+              >
+                <motion.h2
+                  className={`text-xs md:text-sm font-medium mb-1 text-center lg:text-left transition-colors duration-300 ${
+                    currentIndex === index ? 'text-white' : 'text-gray-400'
+                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  {banner.title}
+                </motion.h2>
+                
+                <div className="w-full h-[1px] bg-gray-600 rounded-full">
+                  {currentIndex === index && (
+                    <motion.div
+                      className="h-full bg-white rounded-full"
+                      initial={{ width: '0%' }}
+                      animate={{ width: '100%' }}
+                      transition={{
+                        duration: 8,
+                        ease: 'linear',
+                        repeat: 0
+                      }}
+                      key={`progress-${currentIndex}`}
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
+
+export default Hero;
