@@ -41,7 +41,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-white text-gray-800">
-      {/* Barre Newsletter */}
+      {/* Newsletter Bar */}
       <div className="border-y border-gray-200">
         <div className="container mx-auto px-4 py-3.5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm font-medium text-center md:text-left">Abonnez-vous aujourd'hui et obtenez 5% de réduction sur votre premier achat</p>
@@ -64,11 +64,11 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Contenu Principal du Footer */}
+      {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-8 md:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Contactez-nous */}
-          <div className="space-y-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Contact and Social - Left side on mobile */}
+          <div className="space-y-4 col-span-1">
             <h3 className="font-semibold text-sm mb-4">CONTACTEZ-NOUS</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
@@ -96,28 +96,27 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* À propos */}
-          <div className="space-y-4">
+          {/* About and Customer Service - Right side on mobile */}
+          <div className="space-y-4 col-span-1">
             <h3 className="font-semibold text-sm mb-4">À PROPOS</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:underline">Qu'est-ce que Fiori</a></li>
               <li><a href="#" className="hover:underline">Rapport d'impact</a></li>
               <li><a href="#" className="hover:underline">Prêt à vendre sur Fiori ?</a></li>
             </ul>
+            <div className="mt-8">
+              <h3 className="font-semibold text-sm mb-4">SERVICE CLIENT</h3>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:underline">Nous contacter</a></li>
+                <li><a href="#" className="hover:underline">Informations de livraison</a></li>
+                <li><a href="#" className="hover:underline">FAQ</a></li>
+                <li><a href="#" className="hover:underline">Politique de retour</a></li>
+              </ul>
+            </div>
           </div>
 
-          {/* Service Client */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-sm mb-4">SERVICE CLIENT</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Nous contacter</a></li>
-              <li><a href="#" className="hover:underline">Informations de livraison</a></li>
-              <li><a href="#" className="hover:underline">FAQ</a></li>
-              <li><a href="#" className="hover:underline">Politique de retour</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-4">
+          {/* Les Artisans - Only visible on desktop */}
+          <div className="hidden lg:block space-y-4">
             <h3 className="font-semibold text-sm mb-4">LES ARTISANS</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:underline">Le monde Fiori</a></li>
@@ -136,7 +135,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Barre du Bas */}
+        {/* Bottom Bar */}
         <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-center md:text-left">© 2024 FioriForYou</p>
           <p className="text-xs text-center md:text-right">Fait avec ❤️ en Tunisia par <strong>Holastudie</strong></p>
