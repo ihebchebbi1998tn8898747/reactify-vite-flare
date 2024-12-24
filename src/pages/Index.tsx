@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { trackVisitor } from '../utils/visitorTracking';
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Lazy load components
 const TopNavbar = React.lazy(() => import('../components/TopNavbar'));
 const BrandNavbar = React.lazy(() => import('../components/BrandNavbar'));
 const MainNavbar = React.lazy(() => import('../components/MainNavbar'));
@@ -27,11 +26,18 @@ const LoadingFallback = () => (
 );
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Check if this is the first visit
+    const hasVisited = sessionStorage.getItem('hasVisitedIndex');
+    return !hasVisited;
+  });
   const [isInView, setIsInView] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
+    // Mark that user has visited the index page
+    sessionStorage.setItem('hasVisitedIndex', 'true');
+    
     trackVisitor('Accueil');
     const handleScroll = () => {
       startTransition(() => {
@@ -104,17 +110,7 @@ const Index = () => {
                   <GiftCollection />
                 </Suspense>
               </motion.div>
-              
-              {/* <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isInView ? 1 : 0 }}
-                transition={{ duration: 2.4 }}
-              >
-                <Suspense fallback={<LoadingFallback />}>
-                  <BrandIntro />
-                </Suspense>
-              </motion.div>
- */}
+
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isInView ? 1 : 0 }}
