@@ -25,12 +25,12 @@ const TopNavbar = () => {
 
   return (
     <div className="font-['WomanFontRegular']">
-      <nav className="bg-primary px-3 py-3 sm:py-[8px] shadow-md"> {/* Reduced from py-4 (16px) to py-[14px] on desktop */}
+      <nav className="bg-primary px-2 sm:px-3 py-3 sm:py-[8px] shadow-md">
         <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
-          <div className="flex items-center justify-between w-full sm:w-auto sm:h-[90%]"> {/* Added height reduction for desktop */}
+          <div className="flex items-center justify-between w-full sm:w-auto sm:h-[90%]">
             <button
               onClick={toggleMenu}
-              className="lg:hidden text-white hover:text-accent transition-colors duration-300"
+              className="lg:hidden text-white hover:text-accent transition-colors duration-300 -ml-1"
               aria-label="Toggle menu"
             >
               {isOpen ? (
@@ -50,12 +50,12 @@ const TopNavbar = () => {
               </button>
             </div>
 
-            <div className="flex items-center gap-4 sm:hidden">
+            <div className="flex items-center gap-4 sm:hidden -mr-1">
               <CartIcon />
             </div>
           </div>
 
-          <div className="hidden sm:flex items-center gap-4 sm:h-[90%]"> {/* Added height reduction for desktop */}
+          <div className="hidden sm:flex items-center gap-4 sm:h-[90%]">
             <button
               onClick={() => setIsContactModalOpen(true)}
               className="flex items-center gap-2 text-sm text-white whitespace-nowrap hover:text-accent transition-colors duration-300"
